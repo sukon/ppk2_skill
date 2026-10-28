@@ -1,13 +1,13 @@
-# 安裝 PPK2 量測 skill 到 Claude Code 與 pi
+# 安裝 PPK2 量測 skill 到 Claude Code、pi 與 OMP
 #
-#   pi         : 直接讀 $HOME\.agents\skills\（真檔安裝到這裡）
+#   pi / OMP   : 直接讀 $HOME\.agents\skills\（Agent Skills 標準位置，兩者都支援）
 #   Claude Code: $HOME\.claude\skills\<name> 建立 junction 指到上面那份（與既有 skill 同一機制）
 #
 # 用法：
 #   powershell -ExecutionPolicy Bypass -File install.ps1
 #   powershell -ExecutionPolicy Bypass -File install.ps1 -Uninstall
 #
-# 兩邊都是在啟動時掃描 skill 目錄，安裝後請重開 session 才會看到。
+# 三個 agent 都是啟動時掃描 skill 目錄，安裝後請重開 session 才會看到。
 
 param([switch]$Uninstall)
 
@@ -66,5 +66,5 @@ else {
 }
 
 Write-Host ''
-Write-Host '完成。pi 與 Claude Code 都在啟動時掃描 skill，請重開 session。' -ForegroundColor Green
+Write-Host '完成。pi、OMP 與 Claude Code 都在啟動時掃描 skill，請重開 session。' -ForegroundColor Green
 Write-Host 'skill 內的工作區路徑可用環境變數 PPK_USE_HOME 覆寫（預設 C:\Working\agents\ppk_use）。'

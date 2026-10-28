@@ -13,19 +13,22 @@
 | `requirements.txt` | 相依套件（只有量測模式需要） |
 | `temp/ppk2/` | 量測 CSV 輸出（gitignored） |
 
-## 安裝 Agent skill（Claude Code + pi）
+## 安裝 Agent skill（Claude Code + pi + OMP）
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File install.ps1          # 安裝
 powershell -ExecutionPolicy Bypass -File install.ps1 -Uninstall   # 移除
 ```
 
-安裝後：
+安裝後（`~/.agents/skills/` 是 Agent Skills 標準位置，三個 agent 都讀它）：
 
-- **pi**：讀 `~/.agents/skills/ppk2-current-measurement/`（真檔）
-- **Claude Code**：`~/.claude/skills/ppk2-current-measurement`（junction 指到上面那份）
+| Agent | 讀取位置 |
+| --- | --- |
+| pi | `~/.agents/skills/ppk2-current-measurement/`（真檔） |
+| OMP | 同上（`omp skill list` 可驗證） |
+| Claude Code | `~/.claude/skills/ppk2-current-measurement`（junction 指到上面那份） |
 
-兩邊都是啟動時掃描 skill 目錄，**安裝後要重開 session** 才會看到。
+三邊都是啟動時掃描 skill 目錄，**安裝後要重開 session** 才會看到。
 skill 內的工作區路徑可用環境變數 `PPK_USE_HOME` 覆寫（預設 `C:\Working\agents\ppk_use`）。
 
 ## 快速開始
