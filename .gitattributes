@@ -1,0 +1,2 @@
+# 文字檔案在 repo 與工作目錄都用 LF，避免 Windows 全域 autocrlf 造成換行雜訊
+* text=auto eol=lf
