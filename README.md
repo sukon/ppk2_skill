@@ -8,18 +8,25 @@
 | `TOOLS.md` | 工具索引（命令、參數、輸出位置、限制） |
 | `tools/ppk2_measure.py` | 量測與離線分析工具 |
 | `tests/test_ppk2_measure.py` | 離線測試（不需要儀器） |
+| `skill/ppk2-current-measurement/SKILL.md` | Agent skill（Claude Code 與 pi 共用） |
+| `install.ps1` | 安裝 skill 到 `~/.agents/skills` 並建立 Claude Code 的 junction |
 | `requirements.txt` | 相依套件（只有量測模式需要） |
-| `temp/ppk2/` | 量測 CSV 輸出 |
+| `temp/ppk2/` | 量測 CSV 輸出（gitignored） |
 
-## Agent skill
+## 安裝 Agent skill（Claude Code + pi）
 
-量測流程已封裝成 Agent Skill，Claude Code 與 pi 共用同一份：
+```powershell
+powershell -ExecutionPolicy Bypass -File install.ps1          # 安裝
+powershell -ExecutionPolicy Bypass -File install.ps1 -Uninstall   # 移除
+```
 
-- 位置：`C:\Users\sukon\.agents\skills\ppk2-current-measurement\SKILL.md`
-- Claude Code：`C:\Users\sukon\.claude\skills\ppk2-current-measurement`（junction 指向上面那份）
-- pi：直接讀 `~/.agents/skills/`（同機制）
-- 觸發詞：量電流 / 待機電流 / 耗電 / 電流量測 / 峰值電流 / PPK2 / Power Profiler
-- 工作區路徑可用環境變數 `PPK_USE_HOME` 覆寫（預設 `C:\Working\agents\ppk_use`）
+安裝後：
+
+- **pi**：讀 `~/.agents/skills/ppk2-current-measurement/`（真檔）
+- **Claude Code**：`~/.claude/skills/ppk2-current-measurement`（junction 指到上面那份）
+
+兩邊都是啟動時掃描 skill 目錄，**安裝後要重開 session** 才會看到。
+skill 內的工作區路徑可用環境變數 `PPK_USE_HOME` 覆寫（預設 `C:\Working\agents\ppk_use`）。
 
 ## 快速開始
 
